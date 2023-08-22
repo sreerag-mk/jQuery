@@ -1,0 +1,11 @@
+STEP 1 - Created html, css, js file in assignment-1.
+
+STEP 2 - Created an HTML form.
+
+STEP 3 - Styled HTML form.
+
+STEP 4 - Created a button click function.
+
+STEP 5 - Added form validation using jQuery.
+
+STEP 6 - Checked if the validation is working properly.
