@@ -9,10 +9,16 @@ $(document).ready(function() {
     // const gender = $(".gender").val();
     // const agree = $("#agree").val();
     console.log(`button clicked`);
+    console.log(name)
+    console.log(name.length)
+
+
     if (name === ""){
       $("#forName").text("please enter the name")
     }else if($.isNumeric(name)){
       $("#forName").text("need to contain characters")
+    }else if(name.length < 2){
+      $("#forName").text("minimum 2 character needed")
     }
     else{
       $("#forName").text("")
