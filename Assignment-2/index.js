@@ -71,7 +71,13 @@ $(document).ready(function(){
         sliderChecker();
         
        
-        $("#image").attr("src", `images/${arrayImg[startingIndex]}`);
+        // $("#image").attr("src", `images/${arrayImg[startingIndex]}`);
+        $("#image").attr("src", `images/${arrayImg[startingIndex]}`).animate({
+            opacity : 1,
+        },1000)
+        $("#image").attr("src", `images/${arrayImg[startingIndex]}`).animate({
+            opacity : 0,
+        },2000)
         startingIndex += 1
     }, 3000)
 })
