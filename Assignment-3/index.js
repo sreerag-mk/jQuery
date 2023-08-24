@@ -12,7 +12,7 @@ $(document).ready(function(){
             document.body.appendChild(para);
             console.log("reached")
             temp += 1
-        }else if (temp != 0){
+        }else if (temp === 1){
             img = document.createElement('img')
             console.log("asasasasas")
             img.setAttribute('src', 'images/img_1.jpg');
@@ -30,6 +30,7 @@ $(document).ready(function(){
                 img.setAttribute('src', `images/${arrayImg[indexselected]}`);
 
             })
+            temp +=1
 
         }
     });
