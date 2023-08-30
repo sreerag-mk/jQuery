@@ -297,13 +297,13 @@ $(document).ready(function () {
   indPrice5 = $("#itemcount5").html();
   indPrice4 = $("#itemcount4").html();
   indPrice3 = $("#itemcount3").html();
-  indPrice2 = $("#itemcoun21").html();
+  indPrice2 = $("#itemcount2").html();
   $(document).on("click", "#minusbtn1", function () {
     count1 -= 1;
     const noSpecialChars = indPrice1.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp1").html(count1);
     $("#itemcount1").html(count1 * noSpecialChars);
-    $("#cartp1").html(count1);
+    // $("#cartp1").html(count1);
     if (count1 === 0) {
       cartone1.hide();
       carttwo1.hide();
