@@ -12,21 +12,21 @@ $(document).ready(function () {
     discription:
       "This article is about the road-going sports car. For other Audi cars bearing the R8 name",
     image: "images/car1.jpg",
-    price: "500",
+    price: "200",
   };
   const product_2 = {
     heading: "Mercedes-Benz AMG GT",
     discription:
       "The combination of AMG GTs rapid performance, involving handling, racy exterior and fighter jet cockpit makes it every enthusiasts dream.",
     image: "images/car2.jpg",
-    price: "500",
+    price: "300",
   };
   const product_3 = {
     heading: "Lamborghini Huracan Evo",
     discription:
       "Lamborghinis of old have always had a reputation of just looking good and having a vocal engine to thrill you in a straight-line, not much else.",
     image: "images/car11.jpg",
-    price: "500",
+    price: "400",
   };
   const product_4 = {
     heading: "Audi Q7",
@@ -40,42 +40,42 @@ $(document).ready(function () {
     discription:
       "The Ferrari Roma is an impressive car that offers an exhilarating driving experience, a stunning design, and a powerful engine.",
     image: "images/car5.jpg",
-    price: "500",
+    price: "600",
   };
   const product_6 = {
     heading: "McLaren P1",
     discription:
       "The P1 is a superhero among supercars: supermodel shapely, heroically powerful, stratospherically expensive, and—heres the one drawback—unavailable.",
     image: "images/car6.jpg",
-    price: "500",
+    price: "700",
   };
   const product_7 = {
     heading: "McLaren 720S",
     discription:
       "Not only is the McLaren 720S simply gorgeous to look at, but its also just as entertaining behind the wheel.",
     image: "images/car9.jpg",
-    price: "500",
+    price: "700",
   };
   const product_8 = {
     heading: "McLaren F1",
     discription:
       "The McLaren F1 debuted in 1992. It was the cost-no-object approach to building a car and was such a leap ahead in almost every imaginable way that it changed way we think about supercars forever.",
     image: "images/car8.jpg",
-    price: "500",
+    price: "800",
   };
   const product_9 = {
     heading: "McLaren 675LT SPIDER",
     discription:
       "he 675LT Spider takes the outstanding DNA of the 675LT and adds a retractable folding hard top for the thrill of open top driving. Our fastest convertible indulges you in a rush of exhilaration and pulse-quickening sensations that are pure McLaren.",
     image: "images/car7.jpg",
-    price: "500",
+    price: "900",
   };
   const product_10 = {
     heading: "Ford Mustang",
     discription:
       "So the Mustang is a sports car with very few flaws of one. Sure it is not perfect, but with that price tag, you get a lot of American muscle for your money.",
     image: "images/car10.jpg",
-    price: "500",
+    price: "1000",
   };
   function showElement(product) {
     const title = product.heading;
@@ -109,6 +109,9 @@ $(document).ready(function () {
     button.classList.add("btn1");
     button.setAttribute("id", `btnid${ids}`);
     ids += 1;
+    if (ids > 10) {
+      ids = 1;
+    }
     button.value = "Add to cart";
     div1.appendChild(div3);
     div3.appendChild(headingh2);
@@ -124,20 +127,32 @@ $(document).ready(function () {
   }
   $("#searchbtn").click(function () {
     const searchval = $("#search").val();
+    console.log(searchval);
+    let temp = 0;
     searchval.toLowerCase();
-    flag = 0;
-    $(".item").remove();
+    if (searchval === "") {
+      alert("You have to enter something to search in RAG store");
+      $(".item").show();
+    }
+    else {
+      elementNumber = 0;
     products.forEach((product) => {
       let searchTitle = product.heading;
       searchTitle = searchTitle.trim();
       searchTitle = searchTitle.toLowerCase();
       if (searchTitle.includes(searchval.trim())) {
-        showElement(product);
-        flag = 1;
+        elementNumber += 1;
+        temp = 1;
+      } else if (searchTitle !== searchval.trim()) {
+        const elements = $(".item");
+        elements[elementNumber].style.display = "none";
+        elementNumber += 1;
       }
     });
-    if (flag === 0) {
-      alert("the entered item is not a product");
+    }
+    if (temp === 0){
+      alert("Enterd product is not available in RAG store");
+      $(".item").show();
     }
   });
   const products = [
@@ -274,8 +289,20 @@ $(document).ready(function () {
   const carttwo10 = $("#cartimgdiv10");
   cartone10.hide();
   carttwo10.hide();
+  indPrice10 = $("#itemcount10").html();
+  indPrice9 = $("#itemcount9").html();
+  indPrice8 = $("#itemcount8").html();
+  indPrice7 = $("#itemcount7").html();
+  indPrice6 = $("#itemcount6").html();
+  indPrice5 = $("#itemcount5").html();
+  indPrice4 = $("#itemcount4").html();
+  indPrice3 = $("#itemcount3").html();
+  indPrice2 = $("#itemcoun21").html();
   $(document).on("click", "#minusbtn1", function () {
     count1 -= 1;
+    const noSpecialChars = indPrice1.replace(/[^a-zA-Z0-9 ]/g, "");
+    $("#cartp1").html(count1);
+    $("#itemcount1").html(count1 * noSpecialChars);
     $("#cartp1").html(count1);
     if (count1 === 0) {
       cartone1.hide();
@@ -284,7 +311,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn2", function () {
     count2 -= 1;
+    const noSpecialChars = indPrice2.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp2").html(count2);
+    $("#itemcount2").html(count2 * noSpecialChars);
     if (count2 === 0) {
       cartone2.hide();
       carttwo2.hide();
@@ -292,7 +321,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn3", function () {
     count3 -= 1;
+    const noSpecialChars = indPrice3.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp3").html(count3);
+    $("#itemcount3").html(count3 * noSpecialChars);
     if (count3 === 0) {
       cartone3.hide();
       carttwo3.hide();
@@ -300,7 +331,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn4", function () {
     count4 -= 1;
+    const noSpecialChars = indPrice4.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp4").html(count4);
+    $("#itemcount4").html(count4 * noSpecialChars);
     if (count4 === 0) {
       cartone4.hide();
       carttwo4.hide();
@@ -308,7 +341,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn5", function () {
     count5 -= 1;
+    const noSpecialChars = indPrice5.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp5").html(count5);
+    $("#itemcount5").html(count5 * noSpecialChars);
     if (count5 === 0) {
       cartone5.hide();
       carttwo5.hide();
@@ -316,7 +351,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn6", function () {
     count6 -= 1;
+    const noSpecialChars = indPrice6.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp6").html(count6);
+    $("#itemcount6").html(count6 * noSpecialChars);
     if (count6 === 0) {
       cartone6.hide();
       carttwo6.hide();
@@ -324,7 +361,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn7", function () {
     count7 -= 1;
+    const noSpecialChars = indPrice7.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp7").html(count7);
+    $("#itemcount7").html(count7 * noSpecialChars);
     if (count7 === 0) {
       cartone7.hide();
       carttwo7.hide();
@@ -332,7 +371,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn8", function () {
     count8 -= 1;
+    const noSpecialChars = indPrice8.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp8").html(count8);
+    $("#itemcount8").html(count8 * noSpecialChars);
     if (count8 === 0) {
       cartone8.hide();
       carttwo8.hide();
@@ -340,7 +381,9 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn9", function () {
     count9 -= 1;
+    const noSpecialChars = indPrice9.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp9").html(count9);
+    $("#itemcount9").html(count9 * noSpecialChars);
     if (count9 === 0) {
       cartone9.hide();
       carttwo9.hide();
@@ -348,51 +391,74 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn10", function () {
     count10 -= 1;
+    const noSpecialChars = indPrice10.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp10").html(count10);
+    $("#itemcount10").html(count10 * noSpecialChars);
     if (count10 === 0) {
       cartone10.hide();
       carttwo10.hide();
     }
   });
+  indPrice1 = $("#itemcount1").html();
   $(document).on("click", "#plusbtn1", function () {
     count1 += 1;
+    const noSpecialChars = indPrice1.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp1").html(count1);
+    $("#itemcount1").html(count1 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn2", function () {
     count2 += 1;
+    const noSpecialChars = indPrice2.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp2").html(count2);
+    $("#itemcount2").html(count2 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn3", function () {
     count3 += 1;
+    const noSpecialChars = indPrice3.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp3").html(count3);
+    $("#itemcount3").html(count3 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn4", function () {
     count4 += 1;
+    const noSpecialChars = indPrice4.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp4").html(count4);
+    $("#itemcount4").html(count4 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn5", function () {
     count5 += 1;
+    const noSpecialChars = indPrice5.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp5").html(count5);
+    $("#itemcount5").html(count5 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn6", function () {
     count6 += 1;
+    const noSpecialChars = indPrice6.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp6").html(count6);
+    $("#itemcount6").html(count6 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn7", function () {
     count7 += 1;
+    const noSpecialChars = indPrice7.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp7").html(count7);
+    $("#itemcount7").html(count7 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn8", function () {
     count8 += 1;
+    const noSpecialChars = indPrice8.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp8").html(count8);
+    $("#itemcount8").html(count8 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn9", function () {
     count9 += 1;
+    const noSpecialChars = indPrice9.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp9").html(count9);
+    $("#itemcount9").html(count9 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn10", function () {
     count10 += 1;
+    const noSpecialChars = indPrice10.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp10").html(count10);
+    $("#itemcount10").html(count10 * noSpecialChars);
   });
   $("#btnid1").click(function () {
     count1 += 1;
