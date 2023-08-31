@@ -57,6 +57,7 @@ img{
 
 #cart{
     width: 20%;
+    height: 100vh;
     overflow-y: auto;
     position: absolute;
     background-color: grey;

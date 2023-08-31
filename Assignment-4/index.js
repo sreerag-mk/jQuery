@@ -304,7 +304,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#minusbtn1", function () {
     count1 -= 1;
-    totalAmount = totalAmount - 200;
+    totalAmount = totalAmount - product_1.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice1.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp1").html(count1);
@@ -316,7 +316,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn2", function () {
     count2 -= 1;
-    totalAmount = totalAmount - 300;
+    totalAmount = totalAmount - product_2.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice2.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp2").html(count2);
@@ -328,7 +328,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn3", function () {
     count3 -= 1;
-    totalAmount = totalAmount - 400;
+    totalAmount = totalAmount - product_3.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice3.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp3").html(count3);
@@ -340,7 +340,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn4", function () {
     count4 -= 1;
-    totalAmount = totalAmount - 500;
+    totalAmount = totalAmount - product_4.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice4.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp4").html(count4);
@@ -352,7 +352,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn5", function () {
     count5 -= 1;
-    totalAmount = totalAmount - 600;
+    totalAmount = totalAmount - product_5.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice5.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp5").html(count5);
@@ -364,7 +364,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn6", function () {
     count6 -= 1;
-    totalAmount = totalAmount - 700;
+    totalAmount = totalAmount - product_6.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice6.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp6").html(count6);
@@ -376,7 +376,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn7", function () {
     count7 -= 1;
-    totalAmount = totalAmount - 700;
+    totalAmount = totalAmount - product_7.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice7.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp7").html(count7);
@@ -388,7 +388,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn8", function () {
     count8 -= 1;
-    totalAmount = totalAmount - 800;
+    totalAmount = totalAmount - product_8.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice8.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp8").html(count8);
@@ -400,7 +400,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn9", function () {
     count9 -= 1;
-    totalAmount = totalAmount - 900;
+    totalAmount = totalAmount - product_9.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice9.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp9").html(count9);
@@ -412,7 +412,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#minusbtn10", function () {
     count10 -= 1;
-    totalAmount = totalAmount - 1000;
+    totalAmount = totalAmount - product_10.price;
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice10.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp10").html(count10);
@@ -425,7 +425,7 @@ $(document).ready(function () {
   indPrice1 = $("#itemcount1").html();
   $(document).on("click", "#plusbtn1", function () {
     count1 += 1;
-    totalAmount = totalAmount + 200;
+    totalAmount = totalAmount + Number(product_1.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice1.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp1").html(count1);
@@ -433,7 +433,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn2", function () {
     count2 += 1;
-    totalAmount = totalAmount + 300;
+    totalAmount = totalAmount + Number(product_2.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice2.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp2").html(count2);
@@ -441,7 +441,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn3", function () {
     count3 += 1;
-    totalAmount = totalAmount + 400;
+    totalAmount = totalAmount + Number(product_3.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice3.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp3").html(count3);
@@ -449,7 +449,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn4", function () {
     count4 += 1;
-    totalAmount = totalAmount + 500;
+    totalAmount = totalAmount + Number(product_4.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice4.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp4").html(count4);
@@ -457,7 +457,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn5", function () {
     count5 += 1;
-    totalAmount = totalAmount + 600;
+    totalAmount = totalAmount + Number(product_5.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice5.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp5").html(count5);
@@ -465,7 +465,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn6", function () {
     count6 += 1;
-    totalAmount = totalAmount + 700;
+    totalAmount = totalAmount + Number(product_6.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice6.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp6").html(count6);
@@ -473,7 +473,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn7", function () {
     count7 += 1;
-    totalAmount = totalAmount + 700;
+    totalAmount = totalAmount + Number(product_7.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice7.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp7").html(count7);
@@ -481,14 +481,15 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn8", function () {
     count8 += 1;
-    totalAmount = totalAmount + 800;
+    totalAmount = totalAmount + Number(product_8.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice8.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp8").html(count8);
     $("#itemcount8").html(count8 * noSpecialChars);
   });
   $(document).on("click", "#plusbtn9", function () {
-    count9 += 1;totalAmount = totalAmount + 900;
+    count9 += 1;
+    totalAmount = totalAmount + Number(product_9.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice9.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp9").html(count9);
@@ -496,7 +497,7 @@ $(document).ready(function () {
   });
   $(document).on("click", "#plusbtn10", function () {
     count10 += 1;
-    totalAmount = totalAmount + 1000;
+    totalAmount = totalAmount + Number(product_10.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     const noSpecialChars = indPrice10.replace(/[^a-zA-Z0-9 ]/g, "");
     $("#cartp10").html(count10);
@@ -510,7 +511,7 @@ $(document).ready(function () {
   })
   $("#btnid1").click(function () {
     count1 += 1;
-    totalAmount = totalAmount + 200;
+    totalAmount = totalAmount +  Number(product_1.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     
     if (count1 === 1) {
@@ -524,7 +525,7 @@ $(document).ready(function () {
   });
   $("#btnid2").click(function () {
     count2 += 1;
-    totalAmount = totalAmount + 300;
+    totalAmount = totalAmount +  Number(product_2.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count2 === 1) {
       cartone2.show();
@@ -536,7 +537,7 @@ $(document).ready(function () {
   });
   $("#btnid3").click(function () {
     count3 += 1;
-    totalAmount = totalAmount + 400;
+    totalAmount = totalAmount +  Number(product_3.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count3 === 1) {
       cartone3.show();
@@ -548,7 +549,7 @@ $(document).ready(function () {
   });
   $("#btnid4").click(function () {
     count4 += 1;
-    totalAmount = totalAmount + 500;
+    totalAmount = totalAmount +  Number(product_4.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count4 === 1) {
       cartone4.show();
@@ -560,7 +561,7 @@ $(document).ready(function () {
   });
   $("#btnid5").click(function () {
     count5 += 1;
-    totalAmount = totalAmount + 600;
+    totalAmount = totalAmount +  Number(product_5.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count5 === 1) {
       cartone5.show();
@@ -572,7 +573,7 @@ $(document).ready(function () {
   });
   $("#btnid6").click(function () {
     count6 += 1;
-    totalAmount = totalAmount + 700;
+    totalAmount = totalAmount +  Number(product_6.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count6 === 1) {
       cartone6.show();
@@ -584,7 +585,7 @@ $(document).ready(function () {
   });
   $("#btnid7").click(function () {
     count7 += 1;
-    totalAmount = totalAmount + 700;
+    totalAmount = totalAmount +  Number(product_7.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count7 === 1) {
       cartone7.show();
@@ -596,7 +597,7 @@ $(document).ready(function () {
   });
   $("#btnid8").click(function () {
     count8 += 1;
-    totalAmount = totalAmount + 800;
+    totalAmount = totalAmount +  Number(product_8.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count8 === 1) {
       cartone8.show();
@@ -608,7 +609,7 @@ $(document).ready(function () {
   });
   $("#btnid9").click(function () {
     count9 += 1;
-    totalAmount = totalAmount + 900;
+    totalAmount = totalAmount +  Number(product_9.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count9 === 1) {
       cartone9.show();
@@ -620,7 +621,7 @@ $(document).ready(function () {
   });
   $("#btnid10").click(function () {
     count10 += 1;
-    totalAmount = totalAmount + 1000;
+    totalAmount = totalAmount +  Number(product_10.price);
     $(".totalAmount").html(`Total Amount: ${totalAmount}`);
     if (count10 === 1) {
       cartone10.show();
