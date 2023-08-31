@@ -128,11 +128,11 @@ $(document).ready(function () {
   }
   $("#searchbtn").click(function () {
     const searchval = $("#search").val();
-    console.log(searchval);
     $(".item").show();
     let temp = 0;
-    searchval.toLowerCase();
-    if (searchval === "") {
+    const searchValLower = searchval.toLowerCase();
+    console.log(searchval);
+    if (searchValLower === "") {
       alert("You have to enter something to search in RAG store");
      
     }
@@ -142,10 +142,10 @@ $(document).ready(function () {
       let searchTitle = product.heading;
       searchTitle = searchTitle.trim();
       searchTitle = searchTitle.toLowerCase();
-      if (searchTitle.includes(searchval.trim())) {
+      if (searchTitle.includes(searchValLower.trim())) {
         elementNumber += 1;
         temp = 1;
-      } else if (searchTitle !== searchval.trim()) {
+      } else if (searchTitle !== searchValLower.trim()) {
         const elements = $(".item");
         elements[elementNumber].style.display = "none";
         elementNumber += 1;
