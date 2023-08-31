@@ -88,3 +88,9 @@ img{
     width: 20px;
     border: red;
 }
+
+.totalAmount{
+    margin: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
