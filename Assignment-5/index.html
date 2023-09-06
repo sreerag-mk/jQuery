@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navigation">
+            <H1>RAG STORES</H1>
+            <div id="filterCate">
+                <label for="product">Choose the category:</label>
+                <select id="category" name="product">
+                    <option value="all">All Categories</option>
+                </select>
+
+            </div>
+            <div>
+                <input type="text" placeholder="search here" id="search">
+                <button id="searchbtn">search</button>
+            </div>
+            <div class="productShow">
+                <label for="sort">Sort items</label>
+                <select id="sort" name="sort">
+                    <option value="all">Relevance</option>
+                    <option value="HTL">High to Low</option>
+                    <option value="LTH">Low to High</option>
+                    <option value="rating">rating</option>
+                </select>
+            </div>
+            <P id="cartId">CART</P>
+        </nav>
+    </header>
+    <div class="id" id="cart">
+
+        <p id="totalAmount"></p>
+    </div>
+    <main id="main">
+
+
+    </main>
+    <div id="hide"></div>
+
+    <script src="code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
