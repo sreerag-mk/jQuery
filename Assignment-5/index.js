@@ -28,7 +28,7 @@ $(document).ready(function () {
   function loadingItem(product) {
     let endItem = 3;
     let startItem = 0;
-    let itemScroll = 70;
+    let itemScroll = 90;
 
     console.log("first printing product")
     console.log("endItem" + endItem)
@@ -158,7 +158,7 @@ $(document).ready(function () {
       })
       document.getElementById("category").innerHTML = filter_content_2
       filterItem = productArray;
-      function filteredItems(valueCat, value) {
+      function filteredItems(valueCat) {
 
         console.log(shownItems)
         filterItem = productArray.filter((product) => {
@@ -168,6 +168,13 @@ $(document).ready(function () {
             return product
           }
         });
+        html_content = "";
+        console.log(filterItem)
+        setItems(filterItem)
+        document.getElementById("main").innerHTML = html_content;
+      }
+
+      function sortedItems(value) {
         if (value === 'HTL') {
           html_content = ""
           let HTLProduct = filterItem
@@ -187,10 +194,6 @@ $(document).ready(function () {
           setItems(RATProduct)
           document.getElementById("main").innerHTML = html_content;
         }
-        html_content = "";
-        console.log(filterItem)
-        setItems(filterItem)
-        document.getElementById("main").innerHTML = html_content;
       }
       let dropDown = $("#category")
       dropDown.change(function () {
@@ -198,14 +201,14 @@ $(document).ready(function () {
         console.log(shownItems)
         category = this.value;
         console.log(category)
-        filteredItems(category, "")
+        filteredItems(category)
       })
       let sortDrop = $("#sort")
       sortDrop.change(function () {
         shownItems = []
         console.log(shownItems)
         let value = this.value
-        filteredItems(category, value)
+        sortedItems(value)
       })
 
       $("#searchbtn").click(function () {
@@ -316,4 +319,3 @@ $(document).ready(function () {
     }
   });
 });
-
