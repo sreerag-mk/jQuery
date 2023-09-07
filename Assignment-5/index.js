@@ -2,25 +2,73 @@ $(document).ready(function () {
   let cartItems = [];
   let productArray = [];
   let filterItem = [];
+  let searchItem = [];
+  let shownItems = [];
   let category = "All";
-  let shownItem = 1;
-  let itemScroll = 70;
-  function hideElements() {
-    $(".mainDiv").slice(shownItem, shownItem + 3).show();
-    shownItem += 3;
-  }
-  hideElements();
-  $(window).scroll(function () {
-    const scrollz = window.scroll
-    const element = $(".mainDiv")
-    console.log(scrollz)
-    const scroll = $(this).scrollTop();
-    console.log(scroll)
-    if (scroll > itemScroll) {
-      hideElements();
-      itemScroll += 650;
+  function loadItems(product, startItem, endItem) {
+    // console.log(product);
+    // console.log("inside the code");
+    if (endItem <= product.length) {
+      for (let i = startItem; i < endItem; i++) {
+        shownItems.push(product[i])
+      }
+    } else {
+      console.log("thhe array is finished")
     }
-  });
+
+
+    html_content = "";
+    console.log("inside the code");
+    console.log(shownItems)
+
+    setItems(shownItems)
+    document.getElementById("main").innerHTML = html_content;
+  }
+
+  function loadingItem(product) {
+    let endItem = 3;
+    let startItem = 0;
+    let itemScroll = 70;
+
+    console.log("first printing product")
+    console.log("endItem" + endItem)
+    console.log("startitem" + startItem)
+    console.log("itemscroll" + itemScroll)
+
+    $(window).scroll(function () {
+      // const scrollz = window.scroll
+      const element = $(".mainDiv").height()
+      // console.log(scrollz)
+      // console.log(`element height: ${itemScroll}`)
+      const scroll = $(this).scrollTop();
+      console.log(scroll)
+      console.log(itemScroll)
+      if (endItem === 3) {
+        itemScroll = 70;
+      }
+      if (scroll > itemScroll) {
+        loadItems(product, startItem, endItem)
+        itemScroll += (element * 3) + 100
+        startItem += 3
+        endItem += 3
+        console.log("first printing product")
+        console.log("endItem" + endItem)
+        console.log("startitem" + startItem)
+        console.log("itemscroll" + itemScroll)
+      }
+
+    })
+    loadItems(product, startItem, endItem)
+    startItem += 3
+    endItem += 3
+    console.log("first printing product")
+    console.log("endItem" + endItem)
+    console.log("startitem" + startItem)
+    console.log("itemscroll" + itemScroll)
+  }
+
+
+  ;
   let productId = 1;
   $("#cart").hide();
   $("#cartId").click(function () {
@@ -30,6 +78,8 @@ $(document).ready(function () {
       $("#cart").hide();
     }
   });
+
+
   let html_content = "";
   function getImg(images) {
     return images
@@ -40,18 +90,22 @@ $(document).ready(function () {
 `)
       .join('');
   }
+
+
   function setItems(products) {
     products.forEach((products) => {
       if (productId >= products.length - 1) {
         productId = 0
       }
+      let discountAmount = products.price - (products.price * (products.discountPercentage / 100))
       productData[productId] = {
         id: products.id,
         title: products.title,
-        price: products.price,
+        price: discountAmount,
         thumbnail: products.thumbnail,
         stock: products.stock,
         quantity: 1,
+        originalPrice: products.price,
       };
       const imgHtml = getImg(products.images);
       html_content =
@@ -64,6 +118,7 @@ $(document).ready(function () {
           <div class="item2">
               <h2>${products.title}</h2>
               <P>$${products.price}</P>
+              <P>Discount amount : $${discountAmount}</P>
               <p>${products.rating}/5</p>
               <p>${products.description}</p>
               <button class="btnCart" paraBtnId="para${products.id}">Add to cart</button>
@@ -80,6 +135,8 @@ $(document).ready(function () {
       addToCartBtnId += 1;
     });
   }
+
+
   let productData = {}
   let addToCartBtnId = 1;
   jQuery.ajax({
@@ -88,14 +145,12 @@ $(document).ready(function () {
     success: function (result) {
       let products = result.products;
       productArray = result.products;
-      console.log(products)
-      setItems(products)
-
+      // console.log(products)
+      loadingItem(products)
       let filter_content_2 = `<option value="All">All Categories</option>`;
       products.forEach(product => {
         if (filter_content_2.includes(`${product.category}`)) {
           console.log(product.category);
-
         } else {
 
           filter_content_2 = filter_content_2 + `<option value="${product.category}">${product.category}</option>`
@@ -104,6 +159,8 @@ $(document).ready(function () {
       document.getElementById("category").innerHTML = filter_content_2
       filterItem = productArray;
       function filteredItems(valueCat, value) {
+
+        console.log(shownItems)
         filterItem = productArray.filter((product) => {
           if (valueCat === 'All') {
             return product
@@ -137,59 +194,63 @@ $(document).ready(function () {
       }
       let dropDown = $("#category")
       dropDown.change(function () {
+        shownItems = []
+        console.log(shownItems)
         category = this.value;
         console.log(category)
         filteredItems(category, "")
       })
       let sortDrop = $("#sort")
-      sortDrop.click(function () {
+      sortDrop.change(function () {
+        shownItems = []
+        console.log(shownItems)
         let value = this.value
         filteredItems(category, value)
       })
+
       $("#searchbtn").click(function () {
+        console.log(productArray)
+        shownItems = []
         const searchval = $("#search").val();
-        console.log(searchval);
-        const element = $(".mainDiv")
-        element.show();
-        $(".line").show();
-        let temp = 0;
         const searchValLower = searchval.toLowerCase();
-        console.log(searchval);
         if (searchValLower === "") {
           alert("You have to enter something to search in RAG store");
         } else {
-          let elementNumber = 0;
-          products.forEach((product) => {
+          searchItem = filterItem.filter((product) => {
+            console.log(product)
+            console.log("got inside this code")
             let searchTitle = product.title
-            // console.log(searchTitle)
             searchTitle = searchTitle.trim();
             searchTitle = searchTitle.toLowerCase();
             if (searchTitle.includes(searchValLower.trim())) {
-              console.log(elementNumber)
-              console.log(searchTitle)
-              elementNumber += 1;
-              temp = 1;
-            } else if (searchTitle !== searchValLower.trim()) {
-              console.log(elementNumber)
-              element[elementNumber].style.display = "none";
-              $(".line")[elementNumber].style.display = "none";
-              elementNumber += 1;
+              return product
             }
           })
         }
-        if (temp === 0) {
+        if (searchItem.length === 0 && searchValLower !== "") {
           alert("Enterd product is not available in RAG store");
-          $(".mainDiv   ").show();
+          console.log("Enterd product is not available in RAG store");
+
+        } else if (searchValLower !== "") {
+          console.log(searchItem)
+          html_content = "";
+
+          setItems(searchItem)
+          document.getElementById("main").innerHTML = html_content;
         }
+
       })
       document.getElementById("main").innerHTML = html_content;
       let priceId = 1
       let cart_content = ""
+      let totalAmount = 0
+      let itemAmount = 0
       function cartUpdate() {
 
         cart_content = "";
         console.log(cartItems)
         cartItems.forEach((product) => {
+          itemAmount = (product.price)
           cart_content = cart_content + `
           <div class="mainCart" id="cartId${product.id}">
               <div class="cartimg">
@@ -206,7 +267,11 @@ $(document).ready(function () {
               </div>
           </div>
           `
+          $("#totalAmount").val(totalAmount)
         })
+        console.log(itemAmount)
+        totalAmount = totalAmount + itemAmount
+        console.log(totalAmount)
       }
       $(document).on('click', '.btnCart', function () {
         console.log("you have clicked the button");
@@ -251,13 +316,4 @@ $(document).ready(function () {
     }
   });
 });
-
-
-
-
-
-
-
-
-
 
