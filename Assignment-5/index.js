@@ -13,10 +13,10 @@ $(document).ready(function () {
         shownItems.push(product[i])
       }
     } else {
-      console.log("thhe array is finished")
+      for (let i = startItem; i < product.length; i++) {
+        shownItems.push(product[i])
+      }
     }
-
-
     html_content = "";
     console.log("inside the code");
     console.log(shownItems)
@@ -24,17 +24,15 @@ $(document).ready(function () {
     setItems(shownItems)
     document.getElementById("main").innerHTML = html_content;
   }
-
   function loadingItem(product) {
     let endItem = 3;
     let startItem = 0;
     let itemScroll = 90;
-
+    console.log(product)
     console.log("first printing product")
     console.log("endItem" + endItem)
     console.log("startitem" + startItem)
-    console.log("itemscroll" + itemScroll)
-
+    console.log("itemscroll old" + itemScroll)
     $(window).scroll(function () {
       // const scrollz = window.scroll
       const element = $(".mainDiv").height()
@@ -42,32 +40,26 @@ $(document).ready(function () {
       // console.log(`element height: ${itemScroll}`)
       const scroll = $(this).scrollTop();
       console.log(scroll)
-      console.log(itemScroll)
-      if (endItem === 3) {
-        itemScroll = 70;
-      }
+      console.log("itemscroll new" + itemScroll)
       if (scroll > itemScroll) {
         loadItems(product, startItem, endItem)
-        itemScroll += (element * 3) + 100
+        itemScroll += (element * 3)
         startItem += 3
         endItem += 3
-        console.log("first printing product")
+        console.log("second printing product")
         console.log("endItem" + endItem)
         console.log("startitem" + startItem)
         console.log("itemscroll" + itemScroll)
       }
-
     })
     loadItems(product, startItem, endItem)
     startItem += 3
     endItem += 3
-    console.log("first printing product")
+    console.log("third printing product")
     console.log("endItem" + endItem)
     console.log("startitem" + startItem)
     console.log("itemscroll" + itemScroll)
   }
-
-
   ;
   let productId = 1;
   $("#cart").hide();
@@ -78,8 +70,6 @@ $(document).ready(function () {
       $("#cart").hide();
     }
   });
-
-
   let html_content = "";
   function getImg(images) {
     return images
@@ -90,10 +80,11 @@ $(document).ready(function () {
 `)
       .join('');
   }
-
-
+  let temp = 0
   function setItems(products) {
     products.forEach((products) => {
+      console.log(temp)
+      temp += 1;
       if (productId >= products.length - 1) {
         productId = 0
       }
@@ -126,7 +117,6 @@ $(document).ready(function () {
           </div>
           <div class="item3">
           ${imgHtml}
-
           </div>
           </div>
           <p class="line"></p>
@@ -135,8 +125,6 @@ $(document).ready(function () {
       addToCartBtnId += 1;
     });
   }
-
-
   let productData = {}
   let addToCartBtnId = 1;
   jQuery.ajax({
@@ -145,8 +133,9 @@ $(document).ready(function () {
     success: function (result) {
       let products = result.products;
       productArray = result.products;
-      // console.log(products)
+      console.log(products)
       loadingItem(products)
+      // setItems(products)
       let filter_content_2 = `<option value="All">All Categories</option>`;
       products.forEach(product => {
         if (filter_content_2.includes(`${product.category}`)) {
@@ -159,7 +148,7 @@ $(document).ready(function () {
       document.getElementById("category").innerHTML = filter_content_2
       filterItem = productArray;
       function filteredItems(valueCat) {
-
+        shownItems = []
         console.log(shownItems)
         filterItem = productArray.filter((product) => {
           if (valueCat === 'All') {
@@ -170,34 +159,39 @@ $(document).ready(function () {
         });
         html_content = "";
         console.log(filterItem)
-        setItems(filterItem)
+        // setItems(filterItem)
+        loadingItem(filterItem)
         document.getElementById("main").innerHTML = html_content;
       }
-
       function sortedItems(value) {
+        shownItems = []
         if (value === 'HTL') {
           html_content = ""
           let HTLProduct = filterItem
           HTLProduct.sort((a, b) => b.price - a.price);
-          setItems(HTLProduct)
+          // setItems(HTLProduct)
+          loadingItem(HTLProduct)
           document.getElementById("main").innerHTML = html_content;
         } else if (value === 'LTH') {
           html_content = ""
           let LTHProduct = filterItem
           LTHProduct.sort((a, b) => a.price - b.price);
-          setItems(LTHProduct)
+          // setItems(LTHProduct)
+          loadingItem(LTHProduct)
           document.getElementById("main").innerHTML = html_content;
         } else if (value === "rating") {
           html_content = ""
           let RATProduct = filterItem
           RATProduct.sort((a, b) => b.rating - a.rating);
-          setItems(RATProduct)
+          // setItems(RATProduct)
+          loadingItem(RATProduct)
           document.getElementById("main").innerHTML = html_content;
         }
       }
       let dropDown = $("#category")
       dropDown.change(function () {
         shownItems = []
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
         console.log(shownItems)
         category = this.value;
         console.log(category)
@@ -206,11 +200,11 @@ $(document).ready(function () {
       let sortDrop = $("#sort")
       sortDrop.change(function () {
         shownItems = []
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
         console.log(shownItems)
         let value = this.value
         sortedItems(value)
       })
-
       $("#searchbtn").click(function () {
         console.log(productArray)
         shownItems = []
@@ -241,7 +235,6 @@ $(document).ready(function () {
           setItems(searchItem)
           document.getElementById("main").innerHTML = html_content;
         }
-
       })
       document.getElementById("main").innerHTML = html_content;
       let priceId = 1
@@ -249,7 +242,6 @@ $(document).ready(function () {
       let totalAmount = 0
       let itemAmount = 0
       function cartUpdate() {
-
         cart_content = "";
         console.log(cartItems)
         cartItems.forEach((product) => {
@@ -314,8 +306,6 @@ $(document).ready(function () {
         cartUpdate()
         $("#cart").html(cart_content);
       });
-      $(".mainDiv").hide()
-      $(".mainDiv").slice(0, 3).show();
     }
   });
 });
