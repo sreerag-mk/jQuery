@@ -29,36 +29,36 @@ $(document).ready(function () {
     let startItem = 0;
     let itemScroll = 90;
     console.log(product)
-    console.log("first printing product")
-    console.log("endItem" + endItem)
-    console.log("startitem" + startItem)
-    console.log("itemscroll old" + itemScroll)
+    // console.log("first printing product")
+    // console.log("endItem" + endItem)
+    // console.log("startitem" + startItem)
+    // console.log("itemscroll old" + itemScroll)
     $(window).scroll(function () {
       // const scrollz = window.scroll
       const element = $(".mainDiv").height()
       // console.log(scrollz)
       // console.log(`element height: ${itemScroll}`)
       const scroll = $(this).scrollTop();
-      console.log(scroll)
+      // console.log(scroll)
       console.log("itemscroll new" + itemScroll)
       if (scroll > itemScroll) {
         loadItems(product, startItem, endItem)
         itemScroll += (element * 3)
         startItem += 3
         endItem += 3
-        console.log("second printing product")
-        console.log("endItem" + endItem)
-        console.log("startitem" + startItem)
-        console.log("itemscroll" + itemScroll)
+        // console.log("second printing product")
+        // console.log("endItem" + endItem)
+        // console.log("startitem" + startItem)
+        // console.log("itemscroll" + itemScroll)
       }
     })
     loadItems(product, startItem, endItem)
     startItem += 3
     endItem += 3
-    console.log("third printing product")
-    console.log("endItem" + endItem)
-    console.log("startitem" + startItem)
-    console.log("itemscroll" + itemScroll)
+    // console.log("third printing product")
+    // console.log("endItem" + endItem)
+    // console.log("startitem" + startItem)
+    // console.log("itemscroll" + itemScroll)
   }
   ;
   let productId = 1;
@@ -268,13 +268,24 @@ $(document).ready(function () {
         totalAmount = totalAmount + itemAmount
         console.log(totalAmount)
       }
+      let selectedProduct = []
       $(document).on('click', '.btnCart', function () {
         console.log("you have clicked the button");
         let proId = $(this).closest('.mainDiv').data('product-id')
-        console.log(proId);
-        let selectedProduct = productData[proId];
-        console.log(selectedProduct);
+        console.log("proId = " + proId);
+        for (const key in productData) {
+          if (productData[key].id === proId) {
+            console.log(productData[key]);
+            selectedProduct = productData[key];
+            break;
+          }
+        }
+        console.log("selected product = " + selectedProduct);
+        console.log(selectedProduct)
+        console.log("productDAta = " + productData)
         console.log(productData)
+        // const newProductData = [...new Set(pro)]
+        // console.log(newProductData)
         if (cart_content.includes(`${selectedProduct.title}`)) {
           selectedProduct.quantity += 1
           cartUpdate()
@@ -282,30 +293,62 @@ $(document).ready(function () {
           cartItems.push(selectedProduct);
           cartUpdate()
         }
-        console.log(cart_content)
+        // console.log("cart content = " + cart_content)
         $("#cart").html(cart_content);
       })
       $(document).on("click", ".plus", function () {
         let proId = $(this).attr('id')
         console.log(proId);
-        let selectedProduct = productData[proId];
-        selectedProduct.quantity += 1
-        cartUpdate()
+        console.log('productData')
+        console.log(productData)
+        console.log('selected data')
+        console.log(selectedProduct)
+
+
+        // let selectedProduct = []
+        for (const key in productData) {
+          // console.log("for key is enterred")
+          // console.log(productData[key])
+          // console.log("productdataid =====")
+          // console.log(productData[key].id)
+          // console.log("proId = ")
+          // console.log(proId)
+          if (productData[key].id == proId) {
+            console.log("product key is shown here")
+            console.log(selectedProduct[key]);
+            selectedProduct = productData[key]
+            selectedProduct.quantity += 1
+            cartUpdate()
+            break;
+          }
+        }
         $("#cart").html(cart_content);
       });
       $(document).on("click", ".minus", function () {
         let proId = $(this).attr('id')
         console.log(proId);
-        let selectedProduct = productData[proId];
-        selectedProduct.quantity -= 1
-        if (selectedProduct.quantity <= 0) {
-          let cartIndex = cartItems.indexOf(selectedProduct)
-          console.log(`cartIndex: ${cartIndex}`)
-          cartItems.splice(cartIndex, 1);
+        for (const key in productData) {
+          if (productData[key].id == proId) {
+            console.log("product key is shown here")
+            console.log(selectedProduct[key]);
+            selectedProduct = productData[key]
+            selectedProduct.quantity -= 1
+            if (selectedProduct.quantity <= 0) {
+              let cartIndex = cartItems.indexOf(selectedProduct)
+              console.log(`cartIndex: ${cartIndex}`)
+              cartItems.splice(cartIndex, 1);
+            }
+            cartUpdate()
+            $("#cart").html(cart_content);
+
+            break;
+          }
         }
-        cartUpdate()
-        $("#cart").html(cart_content);
+
       });
+    },
+    error: function () {
+      alert("Failed to load products. Please check your internet connection.");
     }
   });
 });
