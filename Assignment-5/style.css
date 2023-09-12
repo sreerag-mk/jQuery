@@ -142,3 +142,7 @@ button {
 #hide {
     display: hidden;
 }
+
+#totalAmount{
+    color: black;
+}

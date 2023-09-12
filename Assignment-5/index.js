@@ -121,9 +121,11 @@ $(document).ready(function () {
           </div>
           <p class="line"></p>
            `
+           
       productId += 1;
       addToCartBtnId += 1;
     });
+  
   }
   let productData = {}
   let addToCartBtnId = 1;
@@ -240,12 +242,24 @@ $(document).ready(function () {
       let priceId = 1
       let cart_content = ""
       let totalAmount = 0
+      let itemMinus = 0
       let itemAmount = 0
-      function cartUpdate() {
+      let itemProducts = 0;
+      let itemQuantity = 0
+      function cartUpdate(proId, temp) {
         cart_content = "";
-        console.log(cartItems)
+        console.log(`the rpo id is equal to ${proId}`)
+        console.log("emp is equal to "+temp)
         cartItems.forEach((product) => {
+          itemMinus = temp
           itemAmount = (product.price)
+          itemQuantity = (product.quantity)
+          itemProducts = itemAmount * itemQuantity
+          console.log(`the entery way to the cart templates ${product.price}`)
+          
+          if (product.quantity === -1) {
+            product.quantity = 0
+          }
           cart_content = cart_content + `
           <div class="mainCart" id="cartId${product.id}">
               <div class="cartimg">
@@ -253,7 +267,7 @@ $(document).ready(function () {
               </div>
               <div class="cartItem">
                   <h2 class="cartTitle">${product.title}</h2>
-                  <p class="cartPrice" id="priceId${priceId}">${(product.price) * (product.quantity)}</p>
+                  <p class="cartPrice" id="priceId${product.id}">${itemProducts}</p>
                   <div class="cartbtn">
                       <button class="minus" id="${product.id}">-</button>
                       <p class="quantity" id="para${product.id}">${product.quantity}</p>
@@ -262,11 +276,70 @@ $(document).ready(function () {
               </div>
           </div>
           `
-          $("#totalAmount").val(totalAmount)
+
+          // console.log($(this).text())
+          // finalAmount += finalAmount + itemAmount - (itemAmount * itemQuantity-1))
+          // totalAmount = (itemAmount * itemQuantity)
+          
+        },
+        )
+
+        // console.log($(`#cartId${proId}`))
+        // console.log($(`#cartId${proId}`))
+
+        // console.log("the amount is = "+$("#totalAmount").text())
+        // if (itemMinus === 0) {
+        //   finalAmount -= itemAmount * itemQuantity - (itemAmount * (itemQuantity - 1))
+        //   itemQuantity -= 1
+        //   console.log("one part")
+        //   console.log($(this).id)
+        //   console.log(itemAmount)
+        //   console.log(itemQuantity)
+        //   console.log("hello world this is minus btn clicked")
+
+        //   // finalAmount = finalAmount - itemAmount
+        // }
+        // else if (itemQuantity >=2){
+        //   console.log("two part")
+        //   finalAmount += itemAmount
+        //   console.log($(this).id)
+        //   console.log(itemAmount)
+        //   console.log(itemQuantity)
+        //   // console.log("inside the btn")
+        //   // finalAmount = finalAmount + itemAmount
+        //   // totalAmount = 0
+        //   // finalAmount = itemAmount * itemQuantity
+        //   itemQuantity += 1
+        // }else {
+        //   finalAmount += itemAmount * itemQuantity - (itemAmount * (itemQuantity - 1))
+        //   console.log("three part")
+        //   console.log($(this).id)
+        //   itemQuantity += 1
+        //   console.log(itemAmount)
+        //   console.log(itemQuantity)
+        //   // finalAmount = finalAmount + itemProducts
+        //   // finalAmount = finalAmount + (itemQuantity * itemAmount)
+        // }
+        // if (itemQuantity === -1) {
+        //   itemQuantity = 0;
+        // }
+        // cart_content = cart_content + `Total Amount : ${finalAmount.toFixed(2)}`
+        // console.log(itemAmount)
+        // console.log("total amount = ")
+        // console.log(totalAmount)
+
+        console.log(cartItems)
+        let finalAmount = 0
+
+        cartItems.forEach((product) => {
+          console.log(product.price)
+          console.log(product.quantity)
+          finalAmount += product.price * product.quantity 
         })
-        console.log(itemAmount)
-        totalAmount = totalAmount + itemAmount
-        console.log(totalAmount)
+        cart_content = cart_content + `Total Amount : ${finalAmount.toFixed(2)}`
+
+        
+        
       }
       let selectedProduct = []
       $(document).on('click', '.btnCart', function () {
@@ -288,10 +361,10 @@ $(document).ready(function () {
         // console.log(newProductData)
         if (cart_content.includes(`${selectedProduct.title}`)) {
           selectedProduct.quantity += 1
-          cartUpdate()
+          cartUpdate(proId)
         } else {
           cartItems.push(selectedProduct);
-          cartUpdate()
+          cartUpdate(proId)
         }
         // console.log("cart content = " + cart_content)
         $("#cart").html(cart_content);
@@ -318,7 +391,7 @@ $(document).ready(function () {
             console.log(selectedProduct[key]);
             selectedProduct = productData[key]
             selectedProduct.quantity += 1
-            cartUpdate()
+            cartUpdate(proId)
             break;
           }
         }
@@ -326,6 +399,7 @@ $(document).ready(function () {
       });
       $(document).on("click", ".minus", function () {
         let proId = $(this).attr('id')
+        let temp = 0
         console.log(proId);
         for (const key in productData) {
           if (productData[key].id == proId) {
@@ -338,7 +412,7 @@ $(document).ready(function () {
               console.log(`cartIndex: ${cartIndex}`)
               cartItems.splice(cartIndex, 1);
             }
-            cartUpdate()
+            cartUpdate(proId, temp)
             $("#cart").html(cart_content);
 
             break;
